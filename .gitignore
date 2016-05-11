@@ -31,3 +31,14 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# WebStorm
+.idea
+
+# Mac OS X
+*.DS_Store
+*.Spotlight-V100
+*.Trashes
+
+# log
+logs
