@@ -2,17 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>basic-demo</title>
+    <link rel='stylesheet', href="/stylesheets/style.css"/>
+    <title>index</title>
 </head>
-
 <body>
-
 <h1>{{title}}</h1>
-<p>{{head}}</p>
-{{each list as value index}}
-<li>{{index}} - {{value}}</li>
+{{each menu as value index}}
+<li><a href={{value}}>{{value}}</a></li>
 {{/each}}
 <p>{{footer}}</p>
-
 </body>
 </html>
