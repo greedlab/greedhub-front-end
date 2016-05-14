@@ -4,10 +4,10 @@
  *  文档: https://developer.github.com/v3/oauth/
  */
 var request = require('request');
+var qs = require('querystring');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
-var qs = require('querystring');
-var async = require('async');
+var user = require('./user');
 
 var login = {
     oauth: function (req, res, code) {
@@ -23,11 +23,11 @@ var login = {
                 var accessToken = info.access_token;
                 if (accessToken) {
                     cookies.setToken(accessToken,res);
-                    res.redirect(config.home());
+                    res.redirect("/");
                     return;
                 }
             }
-            res.redirect(config.home() + '/login');
+            res.redirect('/login');
         }
         request(url, {
             method: 'POST',

@@ -21,6 +21,8 @@ start
 $ DEBUG=greedhub-front-end npm start
 ```
 
+browser `http://localhost:2028`
+
 ## License
 
 [MIT](LICESE)

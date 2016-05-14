@@ -26,10 +26,29 @@ var user = {
                 cookies.setUserId(detail.id,res);
                 cookies.setUserLogin(detail.login,res);
             }
-            res.redirect(config.home());
+            res.redirect("/");
+        }
+        request(options, callback);
+    },
+    infoCallback:function (req,res,callback) {
+        var options = {
+            url: config.githubdomain + '/user',
+            headers: {
+                'Authorization': 'token ' + cookies.getToken(req),
+                'User-Agent': config.useragent
+            }
+        };
+        // console.log("options:", options);
+        function callback(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var detail = JSON.parse(body);
+                cookies.setUserId(detail.id,res);
+                cookies.setUserLogin(detail.login,res);
+            }
+            res.redirect("/");
         }
         request(options, callback);
     }
-}
+};
 
 module.exports = user;

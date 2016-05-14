@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
         var html = template('index', data);
         res.send(html);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -52,7 +52,7 @@ router.get('/callback', function (req, res, next) {
         login.oauth(req, res, query.code);
         return;
     }
-    res.redirect(config.home() + "/login");
+    res.redirect("/login");
 });
 
 /* 获取登录的用户信息 */
@@ -60,7 +60,7 @@ router.get('/user', function (req, res, next) {
     if (cookies.getToken(req)) {
         user.info(req, res);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -69,7 +69,7 @@ router.get('/notifications', function (req, res, next) {
     if (cookies.getToken(req)) {
         notification.list(req, res, req.query.page);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -78,16 +78,29 @@ router.get('/starring', function (req, res, next) {
     if (cookies.getToken(req)) {
         star.list(req, res, req.query.page);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
 /* events */
 router.get('/events', function (req, res, next) {
-    if (cookies.getToken(req) && cookies.getUserLogin(req)) {
-        event.list(req, res, req.query.page);
+    if (cookies.getToken(req)) {
+        if (cookies.getUserLogin(req)) {
+            event.list(req, res, req.query.page);
+        } else {
+            user.infoCallback(req,res,function () {
+                if (!error && response.statusCode == 200) {
+                    var detail = JSON.parse(body);
+                    cookies.setUserId(detail.id,res);
+                    cookies.setUserLogin(detail.login,res);
+                    event.list(req, res, req.query.page);
+                } else {
+                    res.redirect('/login');
+                }
+            })
+        }   
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -96,7 +109,7 @@ router.get('/feeds', function (req, res, next) {
     if (cookies.getToken(req)) {
         feed.list(req, res);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -105,7 +118,7 @@ router.get('/watching', function (req, res, next) {
     if (cookies.getToken(req)) {
         watch.list(req, res);
     } else {
-        res.redirect(config.home() + '/login');
+        res.redirect('/login');
     }
 });
 
@@ -114,7 +127,7 @@ router.get('/logout', function (req, res, next) {
     if (cookies.getToken(req)) {
         cookies.delToken(res);
     }
-    res.redirect(config.home() + '/login');
+    res.redirect('/login');
 });
 
 module.exports = router;
