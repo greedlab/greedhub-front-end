@@ -7,7 +7,20 @@ a {
   color: #00B7FF;
 }
 
-.center
+/* 元素里面的元素居中 */
+.contentHorizontalCenter
 {
   text-align:center;
+}
+
+.menu {
+  width: 200px;
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  bottom: 0px;
+}
+
+.list {
+
 }

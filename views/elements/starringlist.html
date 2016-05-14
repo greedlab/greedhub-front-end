@@ -1,0 +1,8 @@
+<ui id="eventslist" class="list">
+    {{each list as value index}}
+    <li>
+        <p><a href='{{value.html_url}}'>{{value.full_name}}</a></p>
+        <p>{{value.description}}</p>
+    </li>
+    {{/each}}
+</ui>
