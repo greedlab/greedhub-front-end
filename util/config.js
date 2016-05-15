@@ -6,7 +6,7 @@ var config = {
     scope: "user,repo",
     state: "login_greedhub",
 
-    port: 8080,
+    port: 3000,
     secret: "fsfdJHfdDS3234IJU",
     home: function () {
         // return "http://" + this.domain + ":" + this.port;
