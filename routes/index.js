@@ -1,5 +1,5 @@
 /*
- * 一级路由
+ * 路由
  *
  * Author: Bell
  */
@@ -8,6 +8,8 @@ var express = require('express');
 var router = express.Router();
 var template = require('art-template');
 var path = require('path');
+var debug = require('debug')('greedhub-front-end:server');
+
 var menu = require('../module/menu');
 
 var cookies = require('../util/cookies');
@@ -42,10 +44,10 @@ router.get('/index.html', function (req, res, next) {
 
 /* login */
 router.get('/login', function (req, res, next) {
-    var loginurl = "https://github.com/login/oauth/authorize?client_id=" + config.client_id + "&scope=" + config.scope + "&state=" + config.state;
+    var url = "https://github.com/login/oauth/authorize?client_id=" + config.client_id + "&scope=" + config.scope + "&state=" + config.state;
     var data = {
         title: 'login',
-        loginurl: loginurl
+        loginurl: url
     };
     var html = template('login', data);
     res.send(html);

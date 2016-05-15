@@ -6,6 +6,7 @@
 var request = require('request');
 var template = require('art-template');
 var qs = require('querystring');
+var debug = require('debug')('greedhub-front-end:server');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var link = require('../util/link');
@@ -25,13 +26,13 @@ var notification = {
             }
         };
 
-        // console.log("options:", options);
+        // debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var pageArray = new Array();
                 var index = 0;
                 if (response.headers.link) {
-                    console.log('response.headers.link: ', response.headers.link);
+                    debug('response.headers.link: ', response.headers.link);
                     var prev = link.getPrev(response.headers.link);
                     if (prev) {
                         pageArray[index] = {
@@ -51,7 +52,7 @@ var notification = {
                 }
 
                 var list = JSON.parse(body);
-                console.log("list:", list);
+                debug("list:", list);
                 var data = {
                     title: 'Notifications',
                     menu: menu,

@@ -5,6 +5,7 @@
  */
 var request = require('request');
 var template = require('art-template');
+var debug = require('debug')('greedhub-front-end:server');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var menu = require('../module/menu');
@@ -24,11 +25,11 @@ var repository = {
             }
         };
 
-        // console.log("options:", options);
+        // debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var list = JSON.parse(body);
-                console.log("list:", list);
+                debug("list:", list);
                 var data = {
                     title: 'Starring',
                     menu: menu,

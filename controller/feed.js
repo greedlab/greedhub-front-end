@@ -5,6 +5,7 @@
  */
 var request = require('request');
 var template = require('art-template');
+var debug = require('debug')('greedhub-front-end:server');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var menu = require('../module/menu');
@@ -19,11 +20,11 @@ var feed = {
             }
         };
 
-        // console.log("options:", options);
+        // debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var detail = JSON.parse(body);
-                console.log("detail:", detail);
+                debug("detail:", detail);
                 var data = {
                     title: 'Feeds',
                     menu: menu,

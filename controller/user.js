@@ -5,6 +5,7 @@
  */
 var request = require('request');
 var template = require('art-template');
+var debug = require('debug')('greedhub-front-end:server');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var localStorage = require('../util/localStorage');
@@ -19,7 +20,7 @@ var user = {
                 'User-Agent': config.useragent
             }
         };
-        // console.log("options:", options);
+        // debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var detail = JSON.parse(body);
@@ -38,7 +39,7 @@ var user = {
                 'User-Agent': config.useragent
             }
         };
-        // console.log("options:", options);
+        // debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var detail = JSON.parse(body);

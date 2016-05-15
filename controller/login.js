@@ -5,6 +5,7 @@
  */
 var request = require('request');
 var qs = require('querystring');
+var debug = require('debug')('greedhub-front-end:server');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var user = require('./user');
