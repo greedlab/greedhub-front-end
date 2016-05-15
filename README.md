@@ -2,26 +2,36 @@
 
 a GitHub third party client for front end, which is based on node.js.
 
-**Developing...**
-
-English | [中文](README-CN.md)
+address : <https://greedhub-greedlab.rhcloud.com/>
 
 ## Usage
 
-install dependencies
+English | [中文](README-CN.md)
+
+### config github
+
+<https://github.com/settings/developers> add an application。set `Authorization callback URL`  `http://localhost:8080/callback`.
+
+
+modify `client_id` and `client_secret` in `util/config.js`。
+
+
+### install dependencies
 
 ```
 $ cd greedhub-front-end
 $ npm install
 ```
 
-start
+### start
 
 ```
 $ DEBUG=greedhub-front-end npm start
 ```
 
-browser `http://localhost:2028`
+### browse
+
+<http://localhost:2028>
 
 ## License
 

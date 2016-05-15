@@ -35,6 +35,11 @@ router.get('/', function (req, res, next) {
     }
 });
 
+/* GET home page. */
+router.get('/index.html', function (req, res, next) {
+    res.redirect('/');
+});
+
 /* login */
 router.get('/login', function (req, res, next) {
     var data = {
