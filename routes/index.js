@@ -31,31 +31,7 @@ router.get('/', function (req, res, next) {
         var html = template('index', data);
         res.send(html);
     } else {
-        // res.redirect('/login');
-        var data = {
-            title: 'login'
-        };
-        var html = template('login', data);
-        res.send(html);
-    }
-});
-
-/* GET home page. */
-router.get('/index.html', function (req, res, next) {
-    if (cookies.getToken(req)) {
-        var data = {
-            title: 'title',
-            menu: menu
-        };
-        var html = template('index', data);
-        res.send(html);
-    } else {
-        // res.redirect('/login');
-        var data = {
-            title: 'login'
-        };
-        var html = template('login', data);
-        res.send(html);
+        res.redirect('/login');
     }
 });
 
