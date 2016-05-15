@@ -2,7 +2,7 @@
 
 a GitHub third party client for front end, which is based on node.js.
 
-address : <https://greedhub-greedlab.rhcloud.com/>
+on line : <https://greedhub-greedlab.rhcloud.com/>
 
 ## Usage
 

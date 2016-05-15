@@ -42,8 +42,10 @@ router.get('/index.html', function (req, res, next) {
 
 /* login */
 router.get('/login', function (req, res, next) {
+    var loginurl = "https://github.com/login/oauth/authorize?client_id=" + config.client_id + "&scope=" + config.scope + "&state=" + config.state;
     var data = {
-        title: 'login'
+        title: 'login',
+        loginurl: loginurl
     };
     var html = template('login', data);
     res.send(html);
