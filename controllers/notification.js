@@ -1,20 +1,21 @@
 /*
- *  watching
+ *  notifications
  *
- *  文档: https://developer.github.com/v3/activity/watching/
+ *  文档: https://developer.github.com/v3/activity/notifications/
  */
+
 var request = require('request');
 var template = require('art-template');
 var qs = require('querystring');
-var debug = require('debug')('greedhub-front-end:server');
+var debug = require('debug')('greedhub-front-end:controller');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var link = require('../util/link');
-var menu = require('../module/menu');
+var menu = require('../models/menu');
 
-var watch = {
+var notification = {
     list:function (req,res) {
-        var url = config.githubdomain + '/user/subscriptions';
+        var url = config.githubdomain + '/notifications';
         if (req.query) {
             url = url + "?" + qs.stringify(req.query);
         }
@@ -22,7 +23,8 @@ var watch = {
             url: url,
             headers: {
                 'Authorization': 'token ' + cookies.getToken(req),
-                'User-Agent': config.useragent
+                'User-Agent': config.useragent,
+                'Accept': config.accept
             }
         };
 
@@ -37,7 +39,7 @@ var watch = {
                     if (prev) {
                         pageArray[index] = {
                             title: "prev",
-                            link: "watching?page=" + prev
+                            link: "notifications?page=" + prev
                         };
                         index++;
                     }
@@ -45,20 +47,21 @@ var watch = {
                     if (next) {
                         pageArray[index] = {
                             title: "next",
-                            link: "watching?page=" + next
+                            link: "notifications?page=" + next
                         };
                         index++;
                     }
                 }
+
                 var list = JSON.parse(body);
                 debug("list:", list);
                 var data = {
-                    title: 'Watching',
+                    title: 'Notifications',
                     menu: menu,
                     list: list,
                     pageNavigation: pageArray
                 };
-                var html = template('watching', data);
+                var html = template('notifications', data);
                 res.send(html);
                 return;
             }
@@ -68,4 +71,4 @@ var watch = {
     }
 };
 
-module.exports = watch;
+module.exports = notification;

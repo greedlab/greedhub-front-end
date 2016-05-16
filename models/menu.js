@@ -3,10 +3,10 @@
  */
 var menu = [
     {'title': 'Notifications', 'link': '/notifications'},
-    {'title': 'Repos', 'link': '/repos'},
+    {'title': 'Repositories', 'link': '/repos'},
     {'title': 'Starring', 'link': '/starring'},
     {'title': 'Events', 'link': '/events'},
-    {'title': 'Feeds', 'link': '/feeds'},
+    // {'title': 'Feeds', 'link': '/feeds'},
     {'title': 'Watching', 'link': '/watching'},
     {'title': 'Logout', 'link': '/logout'}
 ];

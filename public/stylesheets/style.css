@@ -13,14 +13,35 @@ a {
   text-align:center;
 }
 
-.menu {
-  width: 200px;
-  position: absolute;
-  left: 50px;
-  top: 0px;
-  bottom: 0px;
+/* 整个界面布局 */
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.list {
+.footer {
+  text-align: center;
+  margin-top: 50px;
+  clear: both;
+}
 
+.body {
+
+}
+
+ul.menu {
+  float: left;
+}
+
+li.menu {
+  margin-bottom: 10px;
+}
+
+.content {
+  margin-left:200px;
+}
+
+.pageNavigation {
+  margin-top: 20px;
 }

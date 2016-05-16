@@ -1,32 +1,37 @@
 /*
- *  收藏
+ *  events
  *
- *  文档: https://developer.github.com/v3/activity/starring/
+ *  文档: https://developer.github.com/v3/activity/events/
  */
 var request = require('request');
 var template = require('art-template');
-var debug = require('debug')('greedhub-front-end:server');
+var qs = require('querystring');
+var debug = require('debug')('greedhub-front-end:controller');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
-var menu = require('../module/menu');
 var link = require('../util/link');
-var qs = require('querystring');
+var menu = require('../models/menu');
 
-var star = {
-    list: function (req, res) {
-        var url = config.githubdomain + '/user/starred';
+var event = {
+    list: function (req, res, userLogin) {
+        var user = userLogin ? userLogin : cookies.getUserLogin(req);
+        var url = config.githubdomain + '/users/' + user + '/received_events';
         if (req.query) {
-            url = url + "?" + qs.stringify(req.query);
+            var query = qs.stringify(req.query);
+            if (query.length > 0) {
+                url = url + "?" + query;
+            }
         }
         var options = {
             url: url,
             headers: {
                 'Authorization': 'token ' + cookies.getToken(req),
-                'User-Agent': config.useragent
+                'User-Agent': config.useragent,
+                'Accept': config.accept
             }
         };
 
-        // debug("options:", options);
+        debug("options:", options);
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var pageArray = new Array();
@@ -37,7 +42,7 @@ var star = {
                     if (prev) {
                         pageArray[index] = {
                             title: "prev",
-                            link: "starring?page=" + prev
+                            link: "events?page=" + prev
                         };
                         index++;
                     }
@@ -45,21 +50,21 @@ var star = {
                     if (next) {
                         pageArray[index] = {
                             title: "next",
-                            link: "starring?page=" + next
+                            link: "events?page=" + next
                         };
                         index++;
                     }
                 }
 
                 var list = JSON.parse(body);
-                // debug("list:", list);
+                debug("list:", list);
                 var data = {
-                    title: 'Starring',
+                    title: 'Events',
                     menu: menu,
                     list: list,
                     pageNavigation: pageArray
                 };
-                var html = template('starring', data);
+                var html = template('events', data);
                 res.send(html);
                 return;
             }
@@ -70,4 +75,4 @@ var star = {
     }
 };
 
-module.exports = star;
+module.exports = event;

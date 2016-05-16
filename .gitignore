@@ -40,5 +40,6 @@ node_modules
 *.Spotlight-V100
 *.Trashes
 
-# log
-logs
+# release
+config.release.js
+

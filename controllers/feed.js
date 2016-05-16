@@ -5,10 +5,10 @@
  */
 var request = require('request');
 var template = require('art-template');
-var debug = require('debug')('greedhub-front-end:server');
+var debug = require('debug')('greedhub-front-end:controller');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
-var menu = require('../module/menu');
+var menu = require('../models/menu');
 
 var feed = {
     list:function (req,res) {
@@ -16,7 +16,8 @@ var feed = {
             url: config.githubdomain + '/feeds',
             headers: {
                 'Authorization': 'token ' + cookies.getToken(req),
-                'User-Agent': config.useragent
+                'User-Agent': config.useragent,
+                'Accept': config.accept
             }
         };
 
@@ -38,6 +39,6 @@ var feed = {
         }
         request(options, callback);
     }
-}
+};
 
 module.exports = feed;

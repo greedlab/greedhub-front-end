@@ -1,5 +1,7 @@
 /*
  * cookies
+ *
+ * cookie 写之后马上读读取不到.
  */
 
 var crypto = require("crypto");
@@ -37,9 +39,6 @@ var cookies = {
             res.cookie('greedhubToken', encode, {maxAge: maxAge});
         }
     },
-    delToken: function (res) {
-        res.cookie('greedhubToken', "", 0);
-    },
     getUserId: function (req) {
         var cookies = req.cookies;
         if (cookies) {
@@ -65,6 +64,12 @@ var cookies = {
         if (userLogin) {
             res.cookie('userLogin', userLogin, {maxAge: maxAge});
         }
+    },
+    clear: function (res) {
+        res.cookie('greedhubCode', "", 0);
+        res.cookie('greedhubToken', "", 0);
+        res.cookie('userId', "", 0);
+        res.cookie('userLogin', "", 0);
     }
 };
 

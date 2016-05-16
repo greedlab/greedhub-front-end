@@ -8,14 +8,6 @@ on line : <https://greedhub-greedlab.rhcloud.com/>
 
 English | [中文](README-CN.md)
 
-### config github
-
-<https://github.com/settings/developers> add an application。set `Authorization callback URL`  `http://localhost:8080/callback`.
-
-
-modify `client_id` and `client_secret` in `util/config.js`。
-
-
 ### install dependencies
 
 ```
@@ -26,12 +18,22 @@ $ npm install
 ### start
 
 ```
-$ DEBUG=greedhub-front-end npm start
+$ DEBUG=greedhub-front-end* npm start
 ```
 
 ### browse
 
-<http://localhost:2028>
+<http://localhost:3000>
+
+## deploy on line
+
+### github
+
+<https://github.com/settings/developers> add an application, and set`Authorization callback URL` `<your address>/callback`
+
+### util/config.js
+
+modify `client_id` and `client_secret` in `util/config.js`
 
 ## License
 

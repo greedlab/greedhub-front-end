@@ -8,30 +8,24 @@ var express = require('express');
 var router = express.Router();
 var template = require('art-template');
 var path = require('path');
-var debug = require('debug')('greedhub-front-end:server');
-
-var menu = require('../module/menu');
+var debug = require('debug')('greedhub-front-end:routes');
 
 var cookies = require('../util/cookies');
 var config = require('../util/config');
 
-var login = require('../controller/login');
-var star = require('../controller/star');
-var event = require('../controller/event');
-var feed = require('../controller/feed');
-var notification = require('../controller/notification');
-var watch = require('../controller/watch');
-var user = require('../controller/user');
+var index = require('../controllers/index');
+var star = require('../controllers/star');
+var event = require('../controllers/event');
+var feed = require('../controllers/feed');
+var notification = require('../controllers/notification');
+var watch = require('../controllers/watch');
+var user = require('../controllers/user');
+var repo = require('../controllers/repo');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
     if (cookies.getToken(req)) {
-        var data = {
-            title: 'title',
-            menu: menu
-        };
-        var html = template('index', data);
-        res.send(html);
+        index.index(req,res);
     } else {
         res.redirect('/login');
     }
@@ -44,13 +38,7 @@ router.get('/index.html', function (req, res, next) {
 
 /* login */
 router.get('/login', function (req, res, next) {
-    var url = "https://github.com/login/oauth/authorize?client_id=" + config.client_id + "&scope=" + config.scope + "&state=" + config.state;
-    var data = {
-        title: 'login',
-        loginurl: url
-    };
-    var html = template('login', data);
-    res.send(html);
+    user.login(req,res);
 });
 
 /* callback */
@@ -58,7 +46,7 @@ router.get('/callback', function (req, res, next) {
     var query = req.query;
     if (query && query.code && query.state && query.state == config.state) {
         cookies.setCode(query.code, res);
-        login.oauth(req, res, query.code);
+        user.oauth(req, res, query.code);
         return;
     }
     res.redirect("/login");
@@ -97,16 +85,16 @@ router.get('/events', function (req, res, next) {
         if (cookies.getUserLogin(req)) {
             event.list(req, res, req.query.page);
         } else {
-            user.infoCallback(req,res,function () {
+            user.infoCallback(req,res,function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     var detail = JSON.parse(body);
                     cookies.setUserId(detail.id,res);
                     cookies.setUserLogin(detail.login,res);
-                    event.list(req, res, req.query.page);
+                    event.list(req, res,detail.login);
                 } else {
                     res.redirect('/login');
                 }
-            })
+            });
         }   
     } else {
         res.redirect('/login');
@@ -131,11 +119,18 @@ router.get('/watching', function (req, res, next) {
     }
 });
 
+/* repos */
+router.get('/repos', function (req, res, next) {
+    if (cookies.getToken(req)) {
+        repo.list(req, res);
+    } else {
+        res.redirect('/login');
+    }
+});
+
 /* logout */
 router.get('/logout', function (req, res, next) {
-    if (cookies.getToken(req)) {
-        cookies.delToken(res);
-    }
+    cookies.clear(res);
     res.redirect('/login');
 });
 

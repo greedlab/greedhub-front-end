@@ -1,17 +1,17 @@
 /*
- *  repository
+ *  repo
  *
- *  文档: https://developer.github.com/v3/activity/starring/
+ *  文档: https://developer.github.com/v3/repos/
  */
 var request = require('request');
 var template = require('art-template');
-var debug = require('debug')('greedhub-front-end:server');
+var debug = require('debug')('greedhub-front-end:controller');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
-var menu = require('../module/menu');
+var menu = require('../models/menu');
 
 var repository = {
-    relativeUrl: '/user/starred',
+    relativeUrl: '/user/repos',
     absoluteUrl: function() {
         return config.githubdomain + this.relativeUrl;
     },
@@ -21,7 +21,8 @@ var repository = {
             url: this.absoluteUrl(),
             headers: {
                 'Authorization': 'token ' + token,
-                'User-Agent': config.useragent
+                'User-Agent': config.useragent,
+                'Accept': config.accept
             }
         };
 
@@ -29,13 +30,13 @@ var repository = {
         function callback(error, response, body) {
             if (!error && response.statusCode == 200) {
                 var list = JSON.parse(body);
-                debug("list:", list);
+                debug('list:', list);
                 var data = {
-                    title: 'Starring',
+                    title: 'Repositories',
                     menu: menu,
                     list: list
                 };
-                var html = template('starring', data);
+                var html = template('repos', data);
                 res.send(html);
                 return;
             }

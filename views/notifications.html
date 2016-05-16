@@ -6,12 +6,17 @@
     <link rel='stylesheet' href="/stylesheets/notifications.css"/>
     <title>{{title}}</title>
 </head>
+
 <body>
-<h1 class="contentHorizontalCenter">{{title}}</h1>
-{{include 'elements/menu'}}
-<div id="content">
-    {{include 'elements/notificationslist'}}
-    {{include 'elements/pageNavigation'}}
+{{include 'elements/header'}}
+<div class="body">
+    {{include 'elements/menu'}}
+    <div class="content">
+        {{include 'elements/notificationslist'}}
+        {{include 'elements/pageNavigation'}}
+    </div>
 </div>
+{{include 'elements/footer'}}
 </body>
+
 </html>

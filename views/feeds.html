@@ -6,9 +6,16 @@
     <link rel='stylesheet' href="/stylesheets/feeds.css"/>
     <title>{{title}}</title>
 </head>
+
 <body>
-<h1 class="contentHorizontalCenter">{{title}}</h1>
-{{include 'elements/menu'}}
-{{include 'elements/feedsDetail'}}
+{{include 'elements/header'}}
+<div class="body">
+    {{include 'elements/menu'}}
+    <div class="content">
+        {{include 'elements/feedsDetail'}}
+    </div>
+</div>
+{{include 'elements/footer'}}
 </body>
+
 </html>
