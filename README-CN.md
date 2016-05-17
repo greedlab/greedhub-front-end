@@ -39,4 +39,9 @@ $ DEBUG=greedhub-front-end* npm start
 
 ## TODO
 
-* repo
+* 改样式
+* index
+* search
+* about
+* user
+* 加返回顶部

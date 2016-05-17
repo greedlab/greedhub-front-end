@@ -1,4 +1,4 @@
-<ul id="eventslist" class="list">
+<ul class="list">
     {{each list as value index}}
     <li><a href={{value.actor.url}}>{{value.actor.login}}</a> {{value.type}} <a href={{value.repo.url}}>{{value.repo.name}}</a></li>
     {{/each}}

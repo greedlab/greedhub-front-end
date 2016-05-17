@@ -31,8 +31,11 @@ router.get('/', function (req, res, next) {
     }
 });
 
-/* GET home page. */
 router.get('/index.html', function (req, res, next) {
+    res.redirect('/');
+});
+
+router.get('/index', function (req, res, next) {
     res.redirect('/');
 });
 

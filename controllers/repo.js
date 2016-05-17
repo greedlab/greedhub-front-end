@@ -5,7 +5,7 @@
  */
 var request = require('request');
 var template = require('art-template');
-var debug = require('debug')('greedhub-front-end:controller');
+var debug = require('debug')('greedhub-front-end:repo');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
 var menu = require('../models/menu');

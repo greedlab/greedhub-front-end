@@ -10,10 +10,13 @@
 <body>
 {{include 'elements/header'}}
 <div class="main container">
-    {{include 'elements/menu'}}
-    <div class="content">
-        {{include 'elements/notifications_list'}}
-        {{include 'elements/page_nav'}}
+    {{include 'search/search_view'}}
+    <div>
+        {{include 'elements/menu'}}
+        <div class="content">
+            {{include 'search/search_repos_list'}}
+            {{include 'elements/page_nav'}}
+        </div>
     </div>
 </div>
 {{include 'elements/footer'}}

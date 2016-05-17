@@ -2,6 +2,7 @@
  * 菜单
  */
 var menu = [
+    {'title': 'Index', 'link': '/'},
     {'title': 'Notifications', 'link': '/notifications'},
     {'title': 'Repositories', 'link': '/repos'},
     {'title': 'Starring', 'link': '/starring'},
