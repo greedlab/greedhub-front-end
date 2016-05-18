@@ -11,7 +11,6 @@ English | [中文](README-CN.md)
 ### install dependencies
 
 ```
-$ cd greedhub-front-end
 $ npm install
 ```
 

@@ -4,14 +4,13 @@
 
 线上地址: <https://greedhub-greedlab.rhcloud.com/>
 
-## 如果使用
+## 使用
 
 [English](README.md) | 中文
 
 ### 安装依赖：
 
 ```
-$ cd greedhub-front-end
 $ npm install
 ```
 

@@ -5,6 +5,7 @@
  */
 var request = require('request');
 var template = require('art-template');
+var qs = require('querystring');
 var debug = require('debug')('greedhub-front-end:repo');
 var config = require('../util/config');
 var cookies = require('../util/cookies');
@@ -21,8 +22,9 @@ var search = {
     },
     repos: function (req, res, q, sort, order) {
         var token = cookies.getToken(req);
+        var query = qs.stringify(req.query);
         var options = {
-            url: config.githubdomain + '/search/repositories' + "?" + qs.stringify(req.query),
+            url: config.githubdomain + '/search/repositories' + "?" + query,
             headers: {
                 'Authorization': 'token ' + token,
                 'User-Agent': config.useragent,
